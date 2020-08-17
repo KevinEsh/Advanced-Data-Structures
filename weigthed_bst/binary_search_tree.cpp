@@ -93,16 +93,6 @@ WeightedBinarySearchTree::WeightedBinarySearchTree(Table table)
             if (arg != i) node->left = dpNodes[i][arg-1];
             if (arg != j) node->right = dpNodes[arg+1][j];
             dpNodes[i][j] = node;
-            cout << node->key << " ";
-            if (node->left != NULL)
-                cout << node->left->key << " ";
-            else
-                cout << node->left << " ";
-            if (node->right != NULL)
-                cout << node->right->key << " ";
-            else
-                cout << node->right << " ";
-            cout << endl;
         }
     }
 
