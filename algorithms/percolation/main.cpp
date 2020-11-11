@@ -99,7 +99,7 @@ int main()
     UnionFind unionfind(size * size + 2);
 
     ofstream myfile;
-    myfile.open("simulation_percolation.txt");
+    myfile.open("simulation_percolation.csv");
 
     // Initializing montecarlo simulation
     for (double prob_cell = 0; prob_cell <= 1; prob_cell += 0.01)
