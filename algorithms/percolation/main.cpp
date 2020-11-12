@@ -10,7 +10,7 @@ using namespace std;
 #define MAX_BIT_SET (1 << 20)
 bitset<MAX_BIT_SET> image;
 
-void print_image(bitset<MAX_BIT_SET> image, int size)
+void print_image(int size)
 {
     for (int i = 0; i < size; i++)
     {
