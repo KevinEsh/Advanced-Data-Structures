@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <bitset>
 #include "../../data_structures/union_find/union_find.h"
+#include "../../tools/progress_bar.h"
 
 using namespace std;
 
@@ -86,30 +87,43 @@ double simulation_percolation(double prob_cell, int simulations, int size, Union
     return percolates / simulations;
 }
 
-int main()
+int main(int argc, char *argv[])
 {
     // Random seed
     srand(time(NULL));
 
-    int size = 10;
+    int size = 20;
+    int bins = 100;
     int simulations = 10000;
-    double prob_cell = 0.7;
-    double prob_percolates = 0;
+
+    double prob_cell;
+    double prob_percolation;
 
     UnionFind unionfind(size * size + 2);
-
     ofstream myfile;
+
+    // In case user set evironment variables
+    if (argc > 1)
+        size = atoi(argv[1]);
+    if (argc > 2)
+        bins = atoi(argv[2]);
+    if (argc > 3)
+        simulations = atoi(argv[3]);
+
     myfile.open("simulation_percolation.csv");
-
-    // Initializing montecarlo simulation
-    for (double prob_cell = 0; prob_cell <= 1; prob_cell += 0.01)
+    cout << "Montecarlo simulation" << endl;
+    for (int b = 1; b <= bins; b++)
     {
-        prob_percolates = simulation_percolation(prob_cell, simulations, size, unionfind);
-        cout << prob_percolates << endl;
-        myfile << prob_cell << "," << prob_percolates << "\n";
-    }
+        // Begin simulation
+        prob_cell = double(b) / double(bins);
+        prob_percolation = simulation_percolation(prob_cell, simulations, size, unionfind);
 
-    //print_image(image, size);
+        // Report simulation
+        print_progress(b, bins, 50);
+        myfile << prob_cell << "," << prob_percolation << "\n";
+    }
+    cout << "Simulation terminated successfully" << endl;
+
     myfile.close();
     return 0;
 }
