@@ -6,6 +6,8 @@
         "iostream": "cpp",
         "unordered_map": "cpp",
         "stdexcept": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp"
     }
 }
